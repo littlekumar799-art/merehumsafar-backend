@@ -1,0 +1,234 @@
+package io.reflectoring.humsafar.security;
+
+import io.reflectoring.humsafar.model.*;
+import io.reflectoring.humsafar.repository.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+@Component
+public class StaticDataSeeder implements CommandLineRunner {
+
+    @Autowired private EducationTypeRepository educationRepo;
+    @Autowired private OccupationTypeRepository occupationRepo;
+    @Autowired private EmployedInRepository employedInRepo;
+    @Autowired private CasteTypeRepository casteRepo;
+    @Autowired private MaritalStatusTypeRepository maritalStatusRepo;
+    @Autowired private ProfileForRepository profileForRepo;
+
+    @Override
+    public void run(String... args) {
+        seedEducationTypes();
+        seedOccupationTypes();
+        seedCasteTypes();
+        seedMaritalStatusTypes();
+        seedProfileFor();
+        seedEmployedIn();
+    }
+
+
+    private void seedEmployedIn() {
+        List<String> employedIn = List.of("Business/Self Employed", "Civil Service", "Defence", "Government/Public Sector", "Private Sector", "Not Working");
+        for (String name : employedIn) {
+            if (!employedInRepo.existsByName(name)) {
+                employedInRepo.save(new EmployedIn(name));
+            }
+        }
+    }
+    private void seedEducationTypes() {
+        Map<String, String> educationTypes = new HashMap<>();
+//        Arts / Science
+        educationTypes.put("B.A", "Arts/Science");
+        educationTypes.put("B.Ed", "Arts/Science");
+        educationTypes.put("B.M.C/B.M.M/B.J.M.C", "Arts/Science");
+        educationTypes.put("B.Sc", "Arts/Science");
+        educationTypes.put("B.Sc Bachelor Of Fine Arts -BFA/BVA", "Arts/Science");
+        educationTypes.put("Bachelor of Library Science", "Arts/Science");
+        educationTypes.put("Bachelor Of Physical Education", "Arts/Science");
+        educationTypes.put("Bachelor Od Social Work", "Arts/Science");
+        educationTypes.put("M.M.C/M.M.M/M.J.M.C", "Arts/Science");
+        educationTypes.put("M.Sc", "Arts/Science");
+        educationTypes.put("M.Sc(Agriculture)", "Arts/Science");
+        educationTypes.put("Master Of Arts - M.A", "Arts/Science");
+        educationTypes.put("Master Of Education -M.Ed", "Arts/Science");
+        educationTypes.put("Master Of FIne Arts -MFA/MVA", "Arts/Science");
+        educationTypes.put("Master Of Library Science", "Arts/Science");
+        educationTypes.put("Master Of Physical Education", "Arts/Science");
+
+//Computers
+        educationTypes.put("B.C.A", "Computers");
+        educationTypes.put("B.IT", "Computers");
+        educationTypes.put("M.C.A", "Computers");
+        //Doctorate
+        educationTypes.put("M.Phil", "Doctorate");
+        educationTypes.put("Ph.D", "Doctorate");
+        //Engineering /Design
+        educationTypes.put("B.Arch", "Engineering/Design");
+        educationTypes.put("B.Des./B.D", "Engineering/Design");
+        educationTypes.put("B.Pharm/ B.Pharma", "Engineering/Design");
+        educationTypes.put("B.tech/B.E", "Engineering/Design");
+        educationTypes.put("M.Arch", "Engineering/Design");
+        educationTypes.put("M.Des/M.Design", "Engineering/Design");
+        educationTypes.put("M.Pharma", "Engineering/Design");
+        educationTypes.put("M.S(Engineering)", "Engineering/Design");
+        educationTypes.put("M.Tech/M.E", "Engineering/Design");
+        //FInance
+        educationTypes.put("B.Com", "Finance/Commerce");
+        educationTypes.put("CFA", "Finance/Commerce");
+        educationTypes.put("Chartered Accountant CA", "Finance/Commerce");
+        educationTypes.put("CS", "Finance/Commerce");
+        educationTypes.put("ICWA", "Finance/Commerce");
+        educationTypes.put("M.Com", "Finance/Commerce");
+        //Islamic
+        educationTypes.put("Aalim Hafiz/Alaima Hafiz", "Islamic");
+        //Law
+        educationTypes.put("Bachelor Of Law - L.L.B", "Law");
+        educationTypes.put("L.L.M", "Law");
+        //Management
+        educationTypes.put("BBA", "Management");
+        educationTypes.put("BHM", "Management");
+        educationTypes.put("M.B.A", "Management");
+        //Medicine
+        educationTypes.put("B.A.M.S", "Medicine");
+        educationTypes.put("B.D.S", "Medicine");
+        educationTypes.put("B.H.M.S", "Medicine");
+        educationTypes.put("B.P.T", "Medicine");
+        educationTypes.put("B.U.M.S", "Medicine");
+        educationTypes.put("Bachelor of Nursing", "Medicine");
+        educationTypes.put("BVSc.", "Medicine");
+        educationTypes.put("D.Pharma", "Medicine");
+        educationTypes.put("Doctor Of Medicine -M.D", "Medicine");
+        //Medicine
+        educationTypes.put("Doctor Of Pharmacy - Pharm. D", "Medicine");
+        educationTypes.put("Doctorate Of Medicine - D.M", "Medicine");
+        educationTypes.put("M.B.B.S", "Medicine");
+        educationTypes.put("M.D.(Homoeopathy)", "Medicine");
+        educationTypes.put("M.D.S", "Medicine");
+        educationTypes.put("M.P.T", "Medicine");
+        educationTypes.put("M.V.Sc.", "Medicine");
+        educationTypes.put("Master Of Chiurgiae -M.Ch.", "Medicine");
+        educationTypes.put("Master Of Surgery - M.S", "Medicine");
+        //Non-Graduate
+        educationTypes.put("Diploma", "Non-Graduate");
+        educationTypes.put("High School", "Non-Graduate");
+        educationTypes.put("Intermediate(12th)", "Non-Graduate");
+        educationTypes.put("Trade School", "Non-Graduate");
+        //Other
+        educationTypes.put("Other", "Non-Graduate");
+
+
+        for (Map.Entry<String, String> entry : educationTypes.entrySet()) {
+            String name = entry.getKey();
+            String department = entry.getValue();
+
+            if (!educationRepo.existsByName(name)) {
+                educationRepo.save(new EducationType(name, department));
+            }
+        }
+    }
+
+    private void seedOccupationTypes() {
+        List<String> occupations = List.of("Looking for Job", "Not Working", "Retired", "Student", "Other");
+        for (String name : occupations) {
+            if (!occupationRepo.existsByName(name)) {
+                occupationRepo.save(new OccupationType(name));
+            }
+        }
+    }
+
+    private void seedCasteTypes() {
+        List<String> castes = List.of(
+                "Ahmed or Ahmmed",
+                "Aarab",
+                "Aarzal",
+                "Aayanavar",
+                "Ansari",
+                "Bagban or Baghban",
+                "Barbhuiya",
+                "Beigh",
+                "Bhat",
+                "Chhipa",
+                "Dar",
+                "Deccanis or Deccani",
+                "Dudekula",
+                "Gada/Gour",
+                "Gaddi",
+                "Ganai",
+                "Idrisi",
+                "Kalal(Iraqi)",
+                "Khan or Pathan",
+                "Konkani",
+                "Labbai",
+                "Ladaf or Nadaf",
+                "Lohar",
+                "Lone",
+                "Malik",
+                "Manihars",
+                "Mansoori",
+                "Mappila",
+                "Memon",
+                "Mewati",
+                "Mir",
+                "Modh Ghanchi",
+                "Mughal",
+                "Mujawar",
+                "Muslim Choudhary",
+                "Najars",
+                "Parray",
+                "Patel",
+                "Pinjara",
+                "Qazi",
+                "Quraishi",
+                "Rajput/Chauhan/Thakur",
+                "Rangrez",
+                "Rather",
+                "Rayeen",
+                "Reshi",
+                "Rowther",
+                "Saifi",
+                "Salmani",
+                "Shah",
+                "Shams or Shamsi",
+                "Sheikh or Shaikh",
+                "Siddique",
+                "Sofis",
+                "Syed",
+                "Tamboli",
+                "Tantray",
+                "Turq or Turk",
+                "Tyagi",
+                "Vohra",
+                "Wani",
+                "No Caste",
+                "Other"
+        );
+
+        for (String name : castes) {
+            if (!casteRepo.existsByName(name)) {
+                casteRepo.save(new CasteType(name));
+            }
+        }
+    }
+
+    private void seedMaritalStatusTypes() {
+        List<String> statuses = List.of("Never Married", "Married", "Divorced","Separated", "Widowed");
+        for (String name : statuses) {
+            if (!maritalStatusRepo.existsByName(name)) {
+                maritalStatusRepo.save(new MaritalStatusType(name));
+            }
+        }
+    }
+
+    private void seedProfileFor() {
+        List<String> profiles = List.of("Self", "Brother", "Sister", "Son","Relative/Friend", "Daughter");
+        for (String name : profiles) {
+            if (!profileForRepo.existsByName(name)) {
+                profileForRepo.save(new ProfileFor(name));
+            }
+        }
+    }
+}
