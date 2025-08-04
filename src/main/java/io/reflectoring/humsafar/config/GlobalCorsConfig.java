@@ -14,7 +14,7 @@ public class GlobalCorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")  // allow all paths
-                        .allowedOrigins("http://localhost:3000") // frontend origin
+                        .allowedOrigins("http://localhost:5173") // frontend origin
                         .allowedOrigins("https://merehumsafar.netlify.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")

@@ -9,11 +9,7 @@ import io.reflectoring.humsafar.repository.UserRepository;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 @RestController
@@ -24,6 +20,12 @@ public class RegisterController {
 
     private final UserRepository userRepository;
 private  final ProfileForRepository profileForRepository;
+
+@GetMapping("/profile/{email}")
+public AppUser getUserProfile(@PathVariable String email) {
+    return userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+}
     @PutMapping("/complete-profile")
     public ResponseEntity<String> completeProfile(@RequestBody CompleteProfileRequest request, @RequestParam String email) {
         AppUser user = userRepository.findByEmail(email)
