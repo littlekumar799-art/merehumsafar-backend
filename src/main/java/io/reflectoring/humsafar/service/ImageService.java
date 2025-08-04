@@ -43,7 +43,7 @@ public class ImageService {
         Path filePath = Paths.get(uploadDir, storedFilename);
         Files.write(filePath, file.getBytes());
 
-        String imageUrl = baseUrl + "/uploads/" + storedFilename;
+        String imageUrl ="/uploads/" + storedFilename;
         String mediaType = file.getContentType();
 
         UploadedImage image = new UploadedImage(

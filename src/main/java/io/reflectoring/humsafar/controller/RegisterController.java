@@ -1,6 +1,7 @@
 package io.reflectoring.humsafar.controller;
 
 import io.reflectoring.humsafar.dto.CompleteProfileRequest;
+import io.reflectoring.humsafar.dto.ResponseUpdateProfile;
 import io.reflectoring.humsafar.model.AppUser;
 
 import io.reflectoring.humsafar.model.ProfileFor;
@@ -27,12 +28,9 @@ public AppUser getUserProfile(@PathVariable String email) {
             .orElseThrow(() -> new RuntimeException("User not found"));
 }
     @PutMapping("/complete-profile")
-    public ResponseEntity<String> completeProfile(@RequestBody CompleteProfileRequest request, @RequestParam String email) {
+    public ResponseEntity<ResponseUpdateProfile> completeProfile(@RequestBody CompleteProfileRequest request, @RequestParam String email) {
         AppUser user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
-        // Fetch ProfileFor entity
-
 
         ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
                 .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
@@ -52,13 +50,16 @@ public AppUser getUserProfile(@PathVariable String email) {
         user.setHighestEducation(request.getHighestEducation());
         user.setOccupation(request.getOccupation());
         user.setEmployedIn(request.getEmployedIn());
-        user.setProfileFor(profileFor); // ✅ Now correct
+        user.setProfileFor(profileFor);
         user.setProfileImageUrl(request.getProfileImageUrl());
         user.setAnnualIncome(request.getAnnualIncome());
         user.setGender(request.getGender());
 
-        userRepository.save(user);
+        AppUser updatedUser = userRepository.save(user);
 
-        return ResponseEntity.ok("Profile updated successfully");
+        // ✅ Custom response with status, message, and updated user
+        ResponseUpdateProfile response = new ResponseUpdateProfile("Profile updated successfully", "200", updatedUser);
+
+        return ResponseEntity.ok(response);
     }
 }
