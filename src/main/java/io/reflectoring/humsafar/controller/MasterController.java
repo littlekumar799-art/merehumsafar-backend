@@ -4,6 +4,7 @@ import io.reflectoring.humsafar.model.*;
 
 import io.reflectoring.humsafar.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/master")
+@CrossOrigin(origins = "https://merehumsafar.netlify.app") // Add CORS here
 @RequiredArgsConstructor
 public class MasterController {
 

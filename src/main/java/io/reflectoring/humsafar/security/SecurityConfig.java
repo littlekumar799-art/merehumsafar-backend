@@ -18,7 +18,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()     // auth routes
                         .requestMatchers("/api/master/**").permitAll()   // ✅ globally accessible master routes
 
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }
