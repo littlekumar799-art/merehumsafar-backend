@@ -19,7 +19,7 @@ public class SentRequests {
     private AppUser toUser;
 
     private Status status;
-    private LocalDateTime createdAt;
+
 
 
     enum Status {

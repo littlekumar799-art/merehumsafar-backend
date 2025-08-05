@@ -15,7 +15,7 @@ public class MaritalStatusType {
     @Column(unique = true)
     private String name;
 
-    private String deparment;
+
 
     // Constructors, Getters, Setters
     public MaritalStatusType() {}

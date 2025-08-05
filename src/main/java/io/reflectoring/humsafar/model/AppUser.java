@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -44,6 +45,7 @@ public class AppUser {
     @Transient
     private String confirmPassword;
 
+    @ManyToOne
     @JoinColumn(name = "marital_status_type_id")
     private MaritalStatusType maritalStatus;
 
@@ -79,7 +81,7 @@ public class AppUser {
     @Column(name = "token") // Optional: to customize DB column name
     private String token;
     private String refreshToken;
-
+   private LocalDateTime createdAt;
 
     public AppUser(String name, String email) {
         this.name = name;
