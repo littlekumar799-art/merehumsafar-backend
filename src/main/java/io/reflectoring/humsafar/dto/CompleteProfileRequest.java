@@ -15,16 +15,14 @@ public class CompleteProfileRequest {
     private String state;
     private String city;
     private boolean liveWithFamily;
-    private String maritalStatus;
+    private Long maritalStatusTypeId;
     private String motherTongue;
-    private String caste;
-    private String highestEducation;
-    private String occupation;
-    private String employedIn;
+    private Long casteTypeId;
+    private Long educationTypeId;
+    private Long occupationTypeId;
+    private Long employedInId;
     private Long profileForId; // <-- change from entity to ID
-    private String profileImageUrl;
+    private Long uploadedImageId;
     private String annualIncome;
     private String gender;
-
-
 }

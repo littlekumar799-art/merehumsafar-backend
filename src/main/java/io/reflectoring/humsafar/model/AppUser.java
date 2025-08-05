@@ -44,29 +44,34 @@ public class AppUser {
     @Transient
     private String confirmPassword;
 
-    @Column(name = "marital_status_type")
-    private String maritalStatus;
+    @JoinColumn(name = "marital_status_type_id")
+    private MaritalStatusType maritalStatus;
 
     private String motherTongue;
 
-    @Column(name = "caste_type")
-    private String caste;
+    @ManyToOne
+    @JoinColumn(name = "caste_type_id")
+    private CasteType caste;
 
-    @Column(name = "education_type")
-    private String highestEducation;
+    @ManyToOne
+    @JoinColumn(name = "education_type_id")
+    private EducationType highestEducation;
 
-    @Column(name = "occupation_type")
-    private String occupation;
+    @ManyToOne
+    @JoinColumn(name = "occupation_type_id")
+    private OccupationType occupation;
 
-    @Column(name = "employed_in")
-    private String employedIn;
+    @ManyToOne
+    @JoinColumn(name = "employed_in_id")
+    private EmployedIn employedIn;
 
     @ManyToOne
     @JoinColumn(name = "profile_for_id")
     private ProfileFor profileFor;
+    @ManyToOne
+@JoinColumn(name = "uploaded_image_id")
+    private UploadedImage uploadedImage;
 
-
-    private String profileImageUrl;
 
     private String annualIncome;
 

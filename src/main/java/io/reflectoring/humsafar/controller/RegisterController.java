@@ -2,11 +2,10 @@ package io.reflectoring.humsafar.controller;
 
 import io.reflectoring.humsafar.dto.CompleteProfileRequest;
 import io.reflectoring.humsafar.dto.ResponseUpdateProfile;
-import io.reflectoring.humsafar.model.AppUser;
+import io.reflectoring.humsafar.model.*;
 
-import io.reflectoring.humsafar.model.ProfileFor;
-import io.reflectoring.humsafar.repository.ProfileForRepository;
-import io.reflectoring.humsafar.repository.UserRepository;
+import io.reflectoring.humsafar.repository.*;
+
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +20,16 @@ public class RegisterController {
 
     private final UserRepository userRepository;
 private  final ProfileForRepository profileForRepository;
+private final EducationTypeRepository educationTypeRepository;
+
+private final OccupationTypeRepository occupationTypeRepository;
+private final CasteTypeRepository casteTypeRepository;
+private final MaritalStatusTypeRepository maritalStatusTypeRepository;
+    private final EmployedInRepository employedInRepository;
+
+    private final UploadedImageRepository uploadedImageRepository;
+
+
 
 @GetMapping("/profile/{email}")
 public AppUser getUserProfile(@PathVariable String email) {
@@ -35,6 +44,26 @@ public AppUser getUserProfile(@PathVariable String email) {
         ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
                 .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
 
+        EducationType educationType = educationTypeRepository.findById(request.getEducationTypeId())
+                .orElseThrow(() -> new RuntimeException("Invalid education type ID"));
+
+        OccupationType occupationType = occupationTypeRepository.findById(request.getOccupationTypeId())
+                .orElseThrow(() -> new RuntimeException("Invalid occupation type ID"));
+
+        CasteType casteType = casteTypeRepository.findById(request.getCasteTypeId())
+                .orElseThrow(() -> new RuntimeException("Invalid caste type ID"));
+
+        MaritalStatusType maritalStatusType = maritalStatusTypeRepository.findById(request.getMaritalStatusTypeId())
+                .orElseThrow(() -> new RuntimeException("Invalid marital status type ID"));
+
+        EmployedIn employedIn = employedInRepository.findById(request.getEmployedInId())
+                .orElseThrow(() -> new RuntimeException("Invalid employed in ID"));
+
+UploadedImage uploadedImage = uploadedImageRepository.findById(request.getUploadedImageId())
+                .orElseThrow(() -> new RuntimeException("Invalid profile image ID"));
+
+
+
         // Update user details
         user.setPhoneNumber(request.getPhoneNumber());
         user.setDateOfBirth(request.getDateOfBirth());
@@ -44,14 +73,14 @@ public AppUser getUserProfile(@PathVariable String email) {
         user.setState(request.getState());
         user.setCity(request.getCity());
         user.setLiveWithFamily(request.isLiveWithFamily());
-        user.setMaritalStatus(request.getMaritalStatus());
+        user.setMaritalStatus(maritalStatusType);
         user.setMotherTongue(request.getMotherTongue());
-        user.setCaste(request.getCaste());
-        user.setHighestEducation(request.getHighestEducation());
-        user.setOccupation(request.getOccupation());
-        user.setEmployedIn(request.getEmployedIn());
+        user.setCaste(casteType);
+        user.setHighestEducation(educationType);
+        user.setOccupation(occupationType);
+        user.setEmployedIn(employedIn);
         user.setProfileFor(profileFor);
-        user.setProfileImageUrl(request.getProfileImageUrl());
+        user.setUploadedImage(uploadedImage);
         user.setAnnualIncome(request.getAnnualIncome());
         user.setGender(request.getGender());
 

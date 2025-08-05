@@ -30,5 +30,6 @@ public class UploadedImage {
         this.uploadedAt = LocalDateTime.now();
     }
 
+
     // Getters and Setters
 }
