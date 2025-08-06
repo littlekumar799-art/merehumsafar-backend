@@ -46,6 +46,7 @@ private  final ProfileForRepository profileForRepository;
         AppUser user = new AppUser();
         user.setEmail(request.getEmail());
         user.setProfileFor(profileFor); // Set the entity properly
+        user.setLiveWithFamily("1");
 
         userRepository.save(user);
 
