@@ -23,6 +23,7 @@ public class MasterController {
     private final MaritalStatusTypeRepository maritalStatusRepo;
     private final ProfileForRepository profileForRepo;
 private  final EmployedInRepository employedInRepo;
+private  final MotherTongueRepository motherTongueRepo;
 
     //
     @GetMapping("/education")
@@ -49,6 +50,11 @@ private  final EmployedInRepository employedInRepo;
     }
 
     //
+
+    @GetMapping("/mother-tongue")
+    public List<MotherTongue> getMotherTongue() {
+        return motherTongueRepo.findAll();
+    }
     @GetMapping("/profile-for")
     public List<ProfileFor> getProfileForTypes() {
         return profileForRepo.findAll();

@@ -81,6 +81,7 @@ public class AppUser {
     @Column(name = "token") // Optional: to customize DB column name
     private String token;
     private String refreshToken;
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
    private LocalDateTime createdAt;
 
     public AppUser(String name, String email) {

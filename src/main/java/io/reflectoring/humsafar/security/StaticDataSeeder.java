@@ -19,6 +19,7 @@ public class StaticDataSeeder implements CommandLineRunner {
     @Autowired private CasteTypeRepository casteRepo;
     @Autowired private MaritalStatusTypeRepository maritalStatusRepo;
     @Autowired private ProfileForRepository profileForRepo;
+    @Autowired private MotherTongueRepository motherTongueRepo;
 
     @Override
     public void run(String... args) {
@@ -28,6 +29,7 @@ public class StaticDataSeeder implements CommandLineRunner {
         seedMaritalStatusTypes();
         seedProfileFor();
         seedEmployedIn();
+        seedMotherTongues();
     }
 
 
@@ -219,6 +221,15 @@ public class StaticDataSeeder implements CommandLineRunner {
         for (String name : statuses) {
             if (!maritalStatusRepo.existsByName(name)) {
                 maritalStatusRepo.save(new MaritalStatusType(name));
+            }
+        }
+    }
+
+    private void seedMotherTongues() {
+        List<String> motherTongues = List.of("Hindi", "English", "French", "Spanish", "German", "Italian", "Arabic", "Other");
+        for (String name : motherTongues) {
+            if (!motherTongueRepo.existsByName(name)) {
+                motherTongueRepo.save(new MotherTongue(name));
             }
         }
     }

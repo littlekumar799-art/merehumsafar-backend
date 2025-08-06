@@ -19,7 +19,10 @@ public class SentRequests {
     private AppUser toUser;
 
     private Status status;
-
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
+    private LocalDateTime createdAt;
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
+    private LocalDateTime updatedAt;
 
 
     enum Status {

@@ -18,6 +18,7 @@ public class UploadedImage {
     private String imageName;
     private String imagePath;
     private String mediaType;
+    @Column(name = "uploaded_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
     private LocalDateTime uploadedAt;
 
     public UploadedImage() {}
