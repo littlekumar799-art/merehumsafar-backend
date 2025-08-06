@@ -38,7 +38,7 @@ public class AppUser {
     private String country;
     private String state;
     private String city;
-    private boolean liveWithFamily;
+    private String liveWithFamily;
 
     private String password;
 

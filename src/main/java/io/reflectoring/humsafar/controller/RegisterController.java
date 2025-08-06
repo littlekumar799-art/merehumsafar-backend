@@ -41,54 +41,65 @@ public AppUser getUserProfile(@PathVariable String email) {
         AppUser user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
-                .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
+        // 🔁 Set only if not null
+        if (request.getName() != null) user.setName(request.getName());
+        if (request.getPhoneNumber() != null) user.setPhoneNumber(request.getPhoneNumber());
+        if (request.getDateOfBirth() != null) user.setDateOfBirth(request.getDateOfBirth());
+        if (request.getHeight() != null) user.setHeight(request.getHeight());
+        if (request.getCountry() != null) user.setCountry(request.getCountry());
+        if (request.getState() != null) user.setState(request.getState());
+        if (request.getCity() != null) user.setCity(request.getCity());
+        if (request.getLiveWithFamily() != null) user.setLiveWithFamily(request.getLiveWithFamily());
+        if (request.getMotherTongue() != null) user.setMotherTongue(request.getMotherTongue());
+        if (request.getAnnualIncome() != null) user.setAnnualIncome(request.getAnnualIncome());
+        if (request.getGender() != null) user.setGender(request.getGender());
 
-        EducationType educationType = educationTypeRepository.findById(request.getEducationTypeId())
-                .orElseThrow(() -> new RuntimeException("Invalid education type ID"));
+        // 🔁 Check and update relational entities only if ID is provided
+        if (request.getProfileForId() != null) {
+            ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
+                    .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
+            user.setProfileFor(profileFor);
+        }
 
-        OccupationType occupationType = occupationTypeRepository.findById(request.getOccupationTypeId())
-                .orElseThrow(() -> new RuntimeException("Invalid occupation type ID"));
+        if (request.getEducationTypeId() != null) {
+            EducationType educationType = educationTypeRepository.findById(request.getEducationTypeId())
+                    .orElseThrow(() -> new RuntimeException("Invalid education type ID"));
+            user.setHighestEducation(educationType);
+        }
 
-        CasteType casteType = casteTypeRepository.findById(request.getCasteTypeId())
-                .orElseThrow(() -> new RuntimeException("Invalid caste type ID"));
+        if (request.getOccupationTypeId() != null) {
+            OccupationType occupationType = occupationTypeRepository.findById(request.getOccupationTypeId())
+                    .orElseThrow(() -> new RuntimeException("Invalid occupation type ID"));
+            user.setOccupation(occupationType);
+        }
 
-        MaritalStatusType maritalStatusType = maritalStatusTypeRepository.findById(request.getMaritalStatusTypeId())
-                .orElseThrow(() -> new RuntimeException("Invalid marital status type ID"));
+        if (request.getCasteTypeId() != null) {
+            CasteType casteType = casteTypeRepository.findById(request.getCasteTypeId())
+                    .orElseThrow(() -> new RuntimeException("Invalid caste type ID"));
+            user.setCaste(casteType);
+        }
 
-        EmployedIn employedIn = employedInRepository.findById(request.getEmployedInId())
-                .orElseThrow(() -> new RuntimeException("Invalid employed in ID"));
+        if (request.getMaritalStatusTypeId() != null) {
+            MaritalStatusType maritalStatusType = maritalStatusTypeRepository.findById(request.getMaritalStatusTypeId())
+                    .orElseThrow(() -> new RuntimeException("Invalid marital status type ID"));
+            user.setMaritalStatus(maritalStatusType);
+        }
 
-UploadedImage uploadedImage = uploadedImageRepository.findById(request.getUploadedImageId())
-                .orElseThrow(() -> new RuntimeException("Invalid profile image ID"));
+        if (request.getEmployedInId() != null) {
+            EmployedIn employedIn = employedInRepository.findById(request.getEmployedInId())
+                    .orElseThrow(() -> new RuntimeException("Invalid employed in ID"));
+            user.setEmployedIn(employedIn);
+        }
 
-
-
-        // Update user details
-        user.setPhoneNumber(request.getPhoneNumber());
-        user.setDateOfBirth(request.getDateOfBirth());
-        user.setHeight(request.getHeight());
-        user.setName(request.getName());
-        user.setCountry(request.getCountry());
-        user.setState(request.getState());
-        user.setCity(request.getCity());
-        user.setLiveWithFamily(request.isLiveWithFamily());
-        user.setMaritalStatus(maritalStatusType);
-        user.setMotherTongue(request.getMotherTongue());
-        user.setCaste(casteType);
-        user.setHighestEducation(educationType);
-        user.setOccupation(occupationType);
-        user.setEmployedIn(employedIn);
-        user.setProfileFor(profileFor);
-        user.setUploadedImage(uploadedImage);
-        user.setAnnualIncome(request.getAnnualIncome());
-        user.setGender(request.getGender());
+        if (request.getUploadedImageId() != null) {
+            UploadedImage uploadedImage = uploadedImageRepository.findById(request.getUploadedImageId())
+                    .orElseThrow(() -> new RuntimeException("Invalid uploaded image ID"));
+            user.setUploadedImage(uploadedImage);
+        }
 
         AppUser updatedUser = userRepository.save(user);
-
-        // ✅ Custom response with status, message, and updated user
         ResponseUpdateProfile response = new ResponseUpdateProfile("Profile updated successfully", "200", updatedUser);
-
         return ResponseEntity.ok(response);
     }
+
 }

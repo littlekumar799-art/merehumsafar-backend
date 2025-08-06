@@ -1,10 +1,13 @@
 package io.reflectoring.humsafar.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CompleteProfileRequest {
     private String name;
     private String email;
@@ -14,7 +17,7 @@ public class CompleteProfileRequest {
     private String country;
     private String state;
     private String city;
-    private boolean liveWithFamily;
+    private String liveWithFamily;
     private Long maritalStatusTypeId;
     private String motherTongue;
     private Long casteTypeId;
