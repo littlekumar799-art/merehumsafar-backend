@@ -36,7 +36,8 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "https://merehumsafar.netlify.app",  // Production
-                "http://localhost:5173"              // Development
+                "http://localhost:5173",             // Development
+                "https://autoadda.netlify.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
