@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/master")
-@CrossOrigin(origins = "https://merehumsafar.netlify.app") // Add CORS here
+//@CrossOrigin(origins = "https://autoadda.netlify.app") // Add CORS here
 @RequiredArgsConstructor
 public class MasterController {
 
