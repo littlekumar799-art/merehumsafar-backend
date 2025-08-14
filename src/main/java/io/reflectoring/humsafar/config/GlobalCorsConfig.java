@@ -16,6 +16,7 @@ public class GlobalCorsConfig {
                 registry.addMapping("/**")  // allow all paths
                         .allowedOrigins("http://localhost:5173") // frontend origin
                         .allowedOrigins("https://merehumsafar.netlify.app")
+                        .allowedOrigins("https://autoadda.netlify.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);  // for cookies/auth headers
