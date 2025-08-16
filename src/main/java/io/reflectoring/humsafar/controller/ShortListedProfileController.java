@@ -83,8 +83,6 @@ public class ShortListedProfileController {
             request.setUser(user);
         }
 
-
-
         return request;
     }
 }

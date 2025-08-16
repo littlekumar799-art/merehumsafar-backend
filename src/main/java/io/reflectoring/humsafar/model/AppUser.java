@@ -49,7 +49,9 @@ public class AppUser {
     @JoinColumn(name = "marital_status_type_id")
     private MaritalStatusType maritalStatus;
 
-    private String motherTongue;
+    @ManyToOne
+    @JoinColumn(name = "mother_tongue_id")
+    private MotherTongue motherTongue;
 
     @ManyToOne
     @JoinColumn(name = "caste_type_id")

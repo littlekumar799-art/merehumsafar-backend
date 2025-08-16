@@ -19,7 +19,7 @@ public class CompleteProfileRequest {
     private String city;
     private String liveWithFamily;
     private Long maritalStatusTypeId;
-    private String motherTongue;
+    private Long motherTongueId;
     private Long casteTypeId;
     private Long educationTypeId;
     private Long occupationTypeId;

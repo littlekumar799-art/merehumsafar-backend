@@ -26,7 +26,7 @@ private final OccupationTypeRepository occupationTypeRepository;
 private final CasteTypeRepository casteTypeRepository;
 private final MaritalStatusTypeRepository maritalStatusTypeRepository;
     private final EmployedInRepository employedInRepository;
-
+private  final MotherTongueRepository motherTongueRepository;
     private final UploadedImageRepository uploadedImageRepository;
 
 
@@ -50,7 +50,7 @@ public AppUser getUserProfile(@PathVariable String email) {
         if (request.getState() != null) user.setState(request.getState());
         if (request.getCity() != null) user.setCity(request.getCity());
         if (request.getLiveWithFamily() != null) user.setLiveWithFamily(request.getLiveWithFamily());
-        if (request.getMotherTongue() != null) user.setMotherTongue(request.getMotherTongue());
+
         if (request.getAnnualIncome() != null) user.setAnnualIncome(request.getAnnualIncome());
         if (request.getGender() != null) user.setGender(request.getGender());
 
@@ -59,6 +59,12 @@ public AppUser getUserProfile(@PathVariable String email) {
             ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
                     .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
             user.setProfileFor(profileFor);
+        }
+
+        if(request.getMotherTongueId() !=null){
+            MotherTongue motherTongue = motherTongueRepository.findById(request.getMotherTongueId())
+                    .orElseThrow(() -> new RuntimeException("Invalid Mother Tongue ID"));
+            user.setMotherTongue(motherTongue);
         }
 
         if (request.getEducationTypeId() != null) {
