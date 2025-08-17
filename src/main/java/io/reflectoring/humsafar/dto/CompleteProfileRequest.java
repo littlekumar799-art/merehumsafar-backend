@@ -9,7 +9,20 @@ import java.time.LocalDate;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CompleteProfileRequest {
-    private String name;
+    private String firstName;
+    private String middleName;
+    private  String lastName;
+    //
+    private  String aboutMe;
+    private  String fatherOccupation;
+    private  String motherOccupation;
+    private  String siblings;
+    private  String religiousPractices;
+    private  String hobbies;
+    private  String isSmoke;
+    private  String isDrink;
+    private  String diet;
+    ///
     private String email;
     private String phoneNumber;
     private LocalDate dateOfBirth;

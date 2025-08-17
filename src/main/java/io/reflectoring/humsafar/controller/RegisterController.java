@@ -42,7 +42,20 @@ public AppUser getUserProfile(@PathVariable String email) {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // 🔁 Set only if not null
-        if (request.getName() != null) user.setName(request.getName());
+        if(request.getAboutMe() != null) user.setAboutMe(request.getAboutMe());
+        if(request.getFatherOccupation()!= null) user.setFatherOccupation(request.getAboutMe());
+        if(request.getMotherOccupation()!=null) user.setMotherOccupation(request.getMotherOccupation());
+        if(request.getSiblings() !=null) user.setSiblings(request.getSiblings());
+        if(request.getReligiousPractices()!=null) user.setReligiousPractices(request.getReligiousPractices());
+        if(request.getHobbies() != null) user.setHobbies(request.getHobbies());
+        if(request.getIsSmoke()!=null) user.setIsSmoke(request.getIsSmoke());
+        if(request.getIsDrink()!=null) user.setIsDrink(request.getIsDrink());
+        if(request.getDiet()!=null) user.setDiet(request.getDiet());
+
+        /// /
+        if (request.getFirstName() != null) user.setFirstName(request.getFirstName());
+        if (request.getMiddleName() != null) user.setMiddleName(request.getMiddleName());
+        if (request.getLastName() != null) user.setLastName(request.getLastName());
         if (request.getPhoneNumber() != null) user.setPhoneNumber(request.getPhoneNumber());
         if (request.getDateOfBirth() != null) user.setDateOfBirth(request.getDateOfBirth());
         if (request.getHeight() != null) user.setHeight(request.getHeight());

@@ -26,44 +26,44 @@ private  final EmployedInRepository employedInRepo;
 private  final MotherTongueRepository motherTongueRepo;
 
     //
-    @GetMapping("/education")
-    public List<EducationType> getEducationTypes() {
-        return educationRepo.findAll();
-    }
+//    @GetMapping("/education")
+//    public List<EducationType> getEducationTypes() {
+//        return educationRepo.findAll();
+//    }
 
     //
-    @GetMapping("/occupation")
-    public List<OccupationType> getOccupationTypes() {
-        return occupationRepo.findAll();
-    }
+//    @GetMapping("/occupation")
+//    public List<OccupationType> getOccupationTypes() {
+//        return occupationRepo.findAll();
+//    }
 
     //
-    @GetMapping("/caste")
-    public List<CasteType> getCasteTypes() {
-        return casteRepo.findAll();
-    }
+//    @GetMapping("/caste")
+//    public List<CasteType> getCasteTypes() {
+//        return casteRepo.findAll();
+//    }
 
     //
-    @GetMapping("/marital")
-    public List<MaritalStatusType> getMaritalStatusTypes() {
-        return maritalStatusRepo.findAll();
-    }
+//    @GetMapping("/marital")
+//    public List<MaritalStatusType> getMaritalStatusTypes() {
+//        return maritalStatusRepo.findAll();
+//    }
 
     //
 
-    @GetMapping("/mother-tongue")
-    public List<MotherTongue> getMotherTongue() {
-        return motherTongueRepo.findAll();
-    }
-    @GetMapping("/profile-for")
-    public List<ProfileFor> getProfileForTypes() {
-        return profileForRepo.findAll();
-    }
-
-    @GetMapping("/employed-in")
-    public List<EmployedIn> getEmployedInTypes() {
-        return employedInRepo.findAll();
-    }
+//    @GetMapping("/mother-tongue")
+//    public List<MotherTongue> getMotherTongue() {
+//        return motherTongueRepo.findAll();
+//    }
+//    @GetMapping("/profile-for")
+//    public List<ProfileFor> getProfileForTypes() {
+//        return profileForRepo.findAll();
+//    }
+//
+//    @GetMapping("/employed-in")
+//    public List<EmployedIn> getEmployedInTypes() {
+//        return employedInRepo.findAll();
+//    }
 
 
 

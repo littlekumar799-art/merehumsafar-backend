@@ -20,9 +20,18 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-    private String name;
+    private String firstName;
+    private String middleName;
+    private  String lastName;
+    private  String aboutMe;
+    private  String fatherOccupation;
+    private  String motherOccupation;
+    private  String siblings;
+    private  String religiousPractices;
+    private  String hobbies;
+    private  String isSmoke;
+    private  String isDrink;
+    private  String diet;
 
     @Email
     @Column(unique = true)
@@ -73,7 +82,7 @@ public class AppUser {
     @JoinColumn(name = "profile_for_id")
     private ProfileFor profileFor;
     @ManyToOne
-@JoinColumn(name = "uploaded_image_id")
+     @JoinColumn(name = "uploaded_image_id")
     private UploadedImage uploadedImage;
 
 
@@ -87,7 +96,7 @@ public class AppUser {
    private LocalDateTime createdAt;
 
     public AppUser(String name, String email) {
-        this.name = name;
+        this.firstName = name;
         this.email = email;
     }
 
