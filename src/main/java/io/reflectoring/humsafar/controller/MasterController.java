@@ -24,12 +24,13 @@ public class MasterController {
     private final ProfileForRepository profileForRepo;
 private  final EmployedInRepository employedInRepo;
 private  final MotherTongueRepository motherTongueRepo;
+private  final UserRepository  userRepo;
 
     //
-//    @GetMapping("/education")
-//    public List<EducationType> getEducationTypes() {
-//        return educationRepo.findAll();
-//    }
+    @GetMapping("/users")
+    public List<AppUser> getAllUsers() {
+        return userRepo.findAll();
+    }
 
     //
 //    @GetMapping("/occupation")
