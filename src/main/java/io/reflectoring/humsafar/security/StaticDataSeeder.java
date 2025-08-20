@@ -3,6 +3,7 @@ package io.reflectoring.humsafar.security;
 import io.reflectoring.humsafar.model.*;
 import io.reflectoring.humsafar.repository.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class StaticDataSeeder implements CommandLineRunner {
     @Autowired private MaritalStatusTypeRepository maritalStatusRepo;
     @Autowired private ProfileForRepository profileForRepo;
     @Autowired private MotherTongueRepository motherTongueRepo;
-
+@Autowired private  BannerRepository  bannerRepository;
     @Override
     public void run(String... args) {
         seedEducationTypes();
@@ -30,6 +31,7 @@ public class StaticDataSeeder implements CommandLineRunner {
         seedProfileFor();
         seedEmployedIn();
         seedMotherTongues();
+        seedBanner();
     }
 
 
@@ -239,6 +241,28 @@ public class StaticDataSeeder implements CommandLineRunner {
         for (String name : profiles) {
             if (!profileForRepo.existsByName(name)) {
                 profileForRepo.save(new ProfileFor(name));
+            }
+        }
+    }
+
+    private void seedBanner() {
+        List<Banner> banners = Arrays.asList(
+                new Banner("Find the One Who Completes Your Soul",
+                        "https://i.pinimg.com/736x/e5/5d/58/e55d587b9c1b9621f47b96189761c470.jpg",
+                        "Cherish Every Moment With Nikah"),
+
+                new Banner("Verified Profiles. Trusted Matches.",
+                        "https://i.pinimg.com/736x/94/38/35/943835f61f02050500d3476ea8522342.jpg",
+                        "Start your journey with confidence."),
+
+                new Banner("Love Starts with a Simple Hello",
+                        "https://i.pinimg.com/736x/53/ff/fc/53fffcf21625bd46f359fafa2a3bc5eb.jpg",
+                        "Your perfect match is just a click away.")
+        );
+
+        for (Banner banner : banners) {
+            if (!bannerRepository.existsByTitle(banner.getTitle())) {
+                bannerRepository.save(banner);
             }
         }
     }
