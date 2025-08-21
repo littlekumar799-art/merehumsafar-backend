@@ -13,7 +13,7 @@ public class Banner {
     private Long id;
     @Column(unique = true, nullable = false)
     private String title;
-    @Column(unique = true, nullable = false)// or title
+    @Column(unique = true, nullable = false)//
     private String image;
     @Column(unique = true, nullable = false)
     private String subTitle;
@@ -34,32 +34,17 @@ public class Banner {
         return id;
     }
 
-
-
     public String getImage() {
         return image;
     }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    
     public String getSubTitle() {
         return subTitle;
     }
 
     public String getTitle() {
-        return subTitle;
+        return title;
     }
-
-    public String setTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
 
 
 }
