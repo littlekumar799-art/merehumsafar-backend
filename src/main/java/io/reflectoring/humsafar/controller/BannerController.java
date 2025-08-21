@@ -44,11 +44,15 @@ public class BannerController {
 
     // 🔹 4. Update banner
     @PutMapping("/{id}")
-    public ResponseEntity<Banner> updateBanner(@PathVariable Long id, @RequestBody Banner bannerDetails) {
+    public ResponseEntity<Banner> updateBanner(
+            @PathVariable Long id,
+            @RequestBody Banner bannerDetails) {
+
         return bannerRepo.findById(id)
                 .map(banner -> {
+                    // DB से मिला हुआ banner का ID same रहेगा
                     banner.setImage(bannerDetails.getImage());
-                    banner.setTitle(bannerDetails.getTitle());   // ✅ अगर field name है
+                    banner.setTitle(bannerDetails.getTitle());
                     banner.setSubTitle(bannerDetails.getSubTitle());
 
                     Banner updated = bannerRepo.save(banner);
@@ -56,7 +60,6 @@ public class BannerController {
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     // 🔹 5. Delete banner
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBanner(@PathVariable Long id) {

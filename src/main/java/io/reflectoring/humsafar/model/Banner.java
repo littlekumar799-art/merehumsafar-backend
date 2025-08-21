@@ -11,9 +11,11 @@ public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String title;      // or title
+    @Column(unique = true, nullable = false)
+    private String title;
+    @Column(unique = true, nullable = false)// or title
     private String image;
+    @Column(unique = true, nullable = false)
     private String subTitle;
 
     // ✅ Default constructor (JPA requires this)
