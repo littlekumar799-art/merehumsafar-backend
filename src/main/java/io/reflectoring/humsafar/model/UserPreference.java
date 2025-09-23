@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Getter
@@ -38,9 +39,8 @@ public class UserPreference {
     private EmployedIn preferredEmployedIn;
 
     private String preferredAnnualIncome;
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
-    private LocalDateTime createdAt;
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
-    private LocalDateTime updatedAt;
-
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
 }

@@ -26,8 +26,7 @@ public class ShortListedProfileController {
     @PostMapping("/add-shortlisted-profile")
     public ResponseEntity<ShortListedProfile> createShortListedProfile(@RequestBody ShortListedProfileRequest request) {
         ShortListedProfile shortlistedProfile = mapShortListedProfileRequest(request, new ShortListedProfile());
-        shortlistedProfile.setCreatedAt(LocalDateTime.now());
-        shortlistedProfile.setUpdatedAt(LocalDateTime.now());
+
         shortListedProfileRepository.save(shortlistedProfile);
         return ResponseEntity.ok(shortlistedProfile);
     }
@@ -52,7 +51,6 @@ public class ShortListedProfileController {
         ShortListedProfile existing = shortListedProfileRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Shortlisted Profile not found with ID: " + id));
         mapShortListedProfileRequest(request, existing);
-        existing.setUpdatedAt(LocalDateTime.now());
 
         shortListedProfileRepository.save(existing);
         return ResponseEntity.ok(existing);

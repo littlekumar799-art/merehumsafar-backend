@@ -1,15 +1,15 @@
 package io.reflectoring.humsafar.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -38,5 +38,10 @@ public class UserProfile {
     private boolean liveWithFamily;
     private Long profileImageId;
     private String gender;
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
+
 
 }

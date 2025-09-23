@@ -13,6 +13,7 @@ import io.reflectoring.humsafar.repository.UserRepository;
 
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -112,7 +113,8 @@ private  final ProfileForRepository profileForRepository;
     public String sendOtp(String email) {
         String otp = String.valueOf(new Random().nextInt(899999) + 100000);
         otpRepository.deleteByEmail(email);
-        otpRepository.save(new OtpEntry(null, email, otp, LocalDateTime.now()));
+        otpRepository.save(new OtpEntry(null, email, otp,   OffsetDateTime.now(),
+                OffsetDateTime  .now()));
         emailService.sendOtp(email, otp);
         return "OTP sent to email";
     }

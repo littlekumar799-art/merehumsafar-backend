@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -20,6 +23,11 @@ public class EducationType {
     private String name;
 
     private String department;
+
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
 
     public EducationType() {
 

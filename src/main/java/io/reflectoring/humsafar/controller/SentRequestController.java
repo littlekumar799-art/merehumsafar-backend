@@ -22,8 +22,7 @@ public class SentRequestController {
     @PostMapping("/create-sent-request")
     public ResponseEntity<SentRequests> createUserPreference(@RequestBody SentReqRequest request) {
         SentRequests resRequest = mapSentRequest(request, new SentRequests());
-        resRequest.setCreatedAt(LocalDateTime.now());
-        resRequest.setUpdatedAt(LocalDateTime.now());
+
         sentRequestsRepository.save(resRequest);
         return ResponseEntity.ok(resRequest);
     }
@@ -48,7 +47,7 @@ public class SentRequestController {
         SentRequests existing = sentRequestsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("SentRequest not found with ID: " + id));
         mapSentRequest(request, existing);
-        existing.setUpdatedAt(LocalDateTime.now());
+
 
         sentRequestsRepository.save(existing);
         return ResponseEntity.ok(existing);

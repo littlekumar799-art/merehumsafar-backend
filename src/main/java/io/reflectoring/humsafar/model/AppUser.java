@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 
 @Getter
@@ -32,7 +33,7 @@ public class AppUser {
     private  String isSmoke;
     private  String isDrink;
     private  String diet;
-
+     private String isSubAdmin;
     @Email
     @Column(unique = true)
     private String email;
@@ -92,8 +93,8 @@ public class AppUser {
     @Column(name = "token") // Optional: to customize DB column name
     private String token;
     private String refreshToken;
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
-   private LocalDateTime createdAt;
+    @Column(name = "created_at")
+   private OffsetDateTime createdAt;
 
     public AppUser(String name, String email) {
         this.firstName = name;

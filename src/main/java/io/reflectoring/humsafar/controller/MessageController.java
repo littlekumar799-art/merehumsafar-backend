@@ -26,8 +26,7 @@ public class MessageController {
     @PostMapping("/create-message")
     public ResponseEntity<Message> createMessage(@RequestBody MessageRequest request) {
         Message message = mapMessageRequest(request, new Message());
-        message.setCreatedAt(LocalDateTime.now());
-        message.setUpdatedAt(LocalDateTime.now());
+
         messageRepository.save(message);
         return ResponseEntity.ok(message);
     }
@@ -52,7 +51,7 @@ public class MessageController {
         Message existing = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found with ID: " + id));
         mapMessageRequest(request, existing);
-        existing.setUpdatedAt(LocalDateTime.now());
+
 
         messageRepository.save(existing);
         return ResponseEntity.ok(existing);

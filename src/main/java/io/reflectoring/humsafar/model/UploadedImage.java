@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Getter
@@ -18,8 +19,11 @@ public class UploadedImage {
     private String imageName;
     private String imagePath;
     private String mediaType;
-    @Column(name = "uploaded_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
-    private LocalDateTime uploadedAt;
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
+
 
     public UploadedImage() {}
 
@@ -28,7 +32,6 @@ public class UploadedImage {
         this.imageName = imageName;
         this.imagePath = imagePath;
         this.mediaType = mediaType;
-        this.uploadedAt = LocalDateTime.now();
     }
 
 

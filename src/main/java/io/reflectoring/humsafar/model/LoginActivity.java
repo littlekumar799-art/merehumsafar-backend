@@ -1,13 +1,11 @@
 package io.reflectoring.humsafar.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Getter
@@ -22,5 +20,9 @@ public class LoginActivity {
     private String userAgent;
     private String loginTime;
     private String logoutTime;
-    private LocalDateTime createdAt;
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
+
 }

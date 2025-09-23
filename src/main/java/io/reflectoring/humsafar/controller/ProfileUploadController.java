@@ -10,7 +10,7 @@ import io.reflectoring.humsafar.model.UploadedImage;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://merehumsafar.netlify.app") // Add CORS here
+// Add CORS here
 @RestController
 @RequestMapping("/api/master/profile")
 public class ProfileUploadController {

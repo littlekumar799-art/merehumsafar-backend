@@ -5,6 +5,7 @@ import lombok.Data;
 public class SignUpRequest {
     private Long profileForId;
     private String email;
+    private  String isSubAdmin;
 
 
 }

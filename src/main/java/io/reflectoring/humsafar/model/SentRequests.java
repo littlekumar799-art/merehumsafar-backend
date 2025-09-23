@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -19,11 +21,10 @@ public class SentRequests {
     private AppUser toUser;
 
     private Status status;
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
-    private LocalDateTime createdAt;
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
-    private LocalDateTime updatedAt;
-
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
 
     enum Status {
         PENDING,

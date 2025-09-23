@@ -21,7 +21,9 @@ public class StaticDataSeeder implements CommandLineRunner {
     @Autowired private MaritalStatusTypeRepository maritalStatusRepo;
     @Autowired private ProfileForRepository profileForRepo;
     @Autowired private MotherTongueRepository motherTongueRepo;
-@Autowired private  BannerRepository  bannerRepository;
+    @Autowired private  ThemeColorRepository themeColorRepository;
+@Autowired private  AppSettingRepository appSettingRepository;
+    @Autowired private  BannerRepository  bannerRepository;
     @Override
     public void run(String... args) {
         seedEducationTypes();
@@ -32,6 +34,8 @@ public class StaticDataSeeder implements CommandLineRunner {
         seedEmployedIn();
         seedMotherTongues();
         seedBanner();
+        seedThemeColor();
+        seedAppSetting();
     }
 
 
@@ -266,4 +270,60 @@ public class StaticDataSeeder implements CommandLineRunner {
             }
         }
     }
+
+
+    private void seedThemeColor() {
+        // check if already exists (to avoid duplicate seeding)
+        if (themeColorRepository.count() == 0) {
+            ThemeColor themeColor = new ThemeColor(
+                    "Main Theme",
+                    "#f7f9fa",
+                    "#edf2f4",
+                    "#d1d9dc",
+                    "#8e9497",
+                    "#f7c6cf",
+                    "#f18696",
+                    "#d90429",
+                    "#7a0217",
+                    "#ffc9d1",
+                    "#ff92a1",
+                    "#ff5469",
+                    "#992e3e"
+            );
+            themeColorRepository.save(themeColor);
+            System.out.println("🌱 ThemeColor seeded successfully!");
+        } else {
+            System.out.println("✅ ThemeColor already exists, skipping seeding.");
+        }
+    }
+
+    //App setting seeder
+// App setting seeder
+    private void seedAppSetting() {
+        // Check agar koi record hai ya nahi
+        if (appSettingRepository.count() == 0) {
+            ThemeColor defaultTheme = themeColorRepository.findById(1L).orElse(null);
+
+            if (defaultTheme == null) {
+                System.out.println("⚠️ Default ThemeColor not found! Please seed ThemeColor first.");
+                return;
+            }
+
+            AppSetting appSetting = new AppSetting();
+            appSetting.setAppName("Humsafar App");
+            appSetting.setEmail("merehumsafar@gmail.com");
+            appSetting.setInstagram("instagram.com");
+            appSetting.setTwitterX("@merehumsafar.twitter.com");
+            appSetting.setAbout("mere humsafar  matrimony website");
+            appSetting.setContactNumber("7878679876");
+            appSetting.setAppLogo("/uploads/logo.png");
+            appSetting.setThemeColor(defaultTheme);
+
+            appSettingRepository.save(appSetting);
+            System.out.println("🌱 AppSetting seeded successfully with default logo!");
+        } else {
+            System.out.println("✅ AppSetting already exists, skipping seeding.");
+        }
+    }
+
 }

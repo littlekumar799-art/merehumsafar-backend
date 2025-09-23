@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -17,6 +20,11 @@ public class Banner {
     private String image;
     @Column(unique = true, nullable = false)
     private String subTitle;
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
+
 
     // ✅ Default constructor (JPA requires this)
     public Banner() {
@@ -37,7 +45,7 @@ public class Banner {
     public String getImage() {
         return image;
     }
-    
+
     public String getSubTitle() {
         return subTitle;
     }

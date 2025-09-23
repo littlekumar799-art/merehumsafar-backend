@@ -22,6 +22,7 @@ public class CompleteProfileRequest {
     private  String isSmoke;
     private  String isDrink;
     private  String diet;
+
     ///
     private String email;
     private String phoneNumber;

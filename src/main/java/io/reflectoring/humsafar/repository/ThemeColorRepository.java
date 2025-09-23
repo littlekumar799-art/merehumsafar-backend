@@ -1,4 +1,7 @@
 package io.reflectoring.humsafar.repository;
 
-public interface ThemeColorRepository {
+import io.reflectoring.humsafar.model.ThemeColor;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface ThemeColorRepository extends JpaRepository<ThemeColor, Long> {
+    boolean existsByTitle(String title);
 }

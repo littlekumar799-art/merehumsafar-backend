@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "https://merehumsafar.netlify.app") // Add CORS here
+
 @RequiredArgsConstructor
 public class AuthController {
 

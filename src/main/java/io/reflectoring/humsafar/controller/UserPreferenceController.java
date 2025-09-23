@@ -25,8 +25,8 @@ public class UserPreferenceController {
     @PostMapping("/create-user-preference")
     public ResponseEntity<UserPreference> createUserPreference(@RequestBody UserPreferenceRequest request) {
         UserPreference preference = mapRequestToUserPreference(request, new UserPreference());
-        preference.setCreatedAt(LocalDateTime.now());
-        preference.setUpdatedAt(LocalDateTime.now());
+
+
         userPreferenceRepository.save(preference);
         return ResponseEntity.ok(preference);
     }
@@ -51,7 +51,7 @@ public class UserPreferenceController {
         UserPreference existing = userPreferenceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("UserPreference not found with ID: " + id));
         mapRequestToUserPreference(request, existing);
-        existing.setUpdatedAt(LocalDateTime.now());
+
         userPreferenceRepository.save(existing);
         return ResponseEntity.ok(existing);
     }

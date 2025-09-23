@@ -1,11 +1,11 @@
 package io.reflectoring.humsafar.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +20,16 @@ public class OtpEntry {
 
     private String email;
     private String otp;
-    private LocalDateTime createdAt;
+   private OffsetDateTime createdAt;
+//    @Column(name = "created_at", columnDefinition = "TIMESTAMP(6) WITHOUT TIME ZONE")
+//    private LocalDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
+
+
+
 
     public boolean isExpired() {
-        return createdAt.plusMinutes(5).isBefore(LocalDateTime.now());
+        return createdAt.plusMinutes(5).isBefore(OffsetDateTime.now());
     }
 }

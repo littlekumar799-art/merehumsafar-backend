@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -15,6 +18,11 @@ public class OccupationType {
     @Column(unique = true)
     private String name;
 
+
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(name = "updated_at")
+    private OffsetDateTime updatedAt;
 
 
     // Constructors, Getters, Setters
