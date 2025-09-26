@@ -40,9 +40,6 @@ private  final ProfileForRepository profileForRepository;
             throw new RuntimeException("Email already registered");
         }
 
-        // ✅ Generate 6-digit OTP
-        String otp = String.valueOf(new Random().nextInt(899999) + 100000);
-
         // Fetch ProfileFor entity
         ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
                 .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
@@ -52,23 +49,12 @@ private  final ProfileForRepository profileForRepository;
         user.setProfileFor(profileFor);
         user.setLiveWithFamily("1");
 
-        // ✅ Check if an OTP entry already exists for this email
-        OtpEntry otpEntry = otpRepository.findByEmail(request.getEmail())
-                .orElse(new OtpEntry());  // create a new one if not present
-
-        // Always update the same record
-        otpEntry.setEmail(request.getEmail());
-        otpEntry.setOtp(otp);
-//        otpEntry.setExpiryTime(LocalDateTime.now().plusMinutes(5)); // optional expiry
-otpEntry.setCreatedAt(OffsetDateTime.now());
-        // ✅ Save updated OTP first
-        otpRepository.save(otpEntry);
 
         // ✅ Save the user
         userRepository.save(user);
 
         // ❌ No email sending if not needed
-        return "OTP generated and saved successfully"; // or return the OTP if needed
+        return sendOtp(request.getEmail());
     }
 
     public String login(LoginRequest request) {
