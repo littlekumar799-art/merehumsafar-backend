@@ -60,7 +60,7 @@ private  final ProfileForRepository profileForRepository;
         otpEntry.setEmail(request.getEmail());
         otpEntry.setOtp(otp);
 //        otpEntry.setExpiryTime(LocalDateTime.now().plusMinutes(5)); // optional expiry
-
+otpEntry.setCreatedAt(OffsetDateTime.now());
         // ✅ Save updated OTP first
         otpRepository.save(otpEntry);
 
