@@ -118,8 +118,8 @@ private  final ProfileForRepository profileForRepository;
         otpRepository.deleteByEmail(email);
         otpRepository.save(new OtpEntry(null, email, otp,   OffsetDateTime.now(),
                 OffsetDateTime  .now()));
-        emailService.sendOtp(email, otp);
-        return "OTP sent to email";
+//        emailService.sendOtp(email, otp);
+        return otp;
     }
 
     public boolean validateToken(String token) {
