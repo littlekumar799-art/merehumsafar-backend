@@ -27,7 +27,7 @@ public class CompleteProfileRequest {
     private String email;
     private String phoneNumber;
     private LocalDate dateOfBirth;
-    private Integer height;
+    private String height;
     private String country;
     private String state;
     private String city;

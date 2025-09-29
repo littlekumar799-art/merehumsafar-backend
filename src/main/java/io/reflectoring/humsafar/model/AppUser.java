@@ -43,7 +43,7 @@ public class AppUser {
 
     private LocalDate dateOfBirth;
 
-    private Integer height;
+    private String height;
 
     private String country;
     private String state;
