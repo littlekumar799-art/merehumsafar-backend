@@ -43,7 +43,7 @@ public AppUser getUserProfile(@PathVariable String email) {
 
         // 🔁 Set only if not null
         if(request.getAboutMe() != null) user.setAboutMe(request.getAboutMe());
-        if(request.getFatherOccupation()!= null) user.setFatherOccupation(request.getAboutMe());
+        if(request.getFatherOccupation()!= null) user.setFatherOccupation(request.getFatherOccupation());
         if(request.getMotherOccupation()!=null) user.setMotherOccupation(request.getMotherOccupation());
         if(request.getSiblings() !=null) user.setSiblings(request.getSiblings());
         if(request.getReligiousPractices()!=null) user.setReligiousPractices(request.getReligiousPractices());
