@@ -40,19 +40,6 @@ private  final ProfileForRepository profileForRepository;
             throw new RuntimeException("Email already registered");
         }
 
-        // Fetch ProfileFor entity
-        ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
-                .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
-
-        AppUser user = new AppUser();
-        user.setEmail(request.getEmail());
-        user.setProfileFor(profileFor);
-        user.setLiveWithFamily("1");
-
-
-        // ✅ Save the user
-        userRepository.save(user);
-
         // ❌ No email sending if not needed
         return sendOtp(request.getEmail());
     }
@@ -99,7 +86,20 @@ private  final ProfileForRepository profileForRepository;
 
         String token = jwtProvider.generateToken(request.getEmail());
 
-        AppUser user = null;
+
+        // Fetch ProfileFor entity
+        ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
+                .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
+
+        AppUser user = new AppUser();
+        user.setEmail(request.getEmail());
+        user.setProfileFor(profileFor);
+        user.setLiveWithFamily("1");
+
+        // ✅ Save the user
+        userRepository.save(user);
+
+//        AppUser user = null;
         Optional<AppUser> userOptional = userRepository.findByEmail(request.getEmail());
         if (userOptional.isPresent()) {
             user = userOptional.get();
