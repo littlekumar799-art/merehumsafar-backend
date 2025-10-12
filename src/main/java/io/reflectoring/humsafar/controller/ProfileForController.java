@@ -38,8 +38,8 @@ public class ProfileForController {
 
     // 🔹 3. Create new Profile For
     @PostMapping
-    public ResponseEntity<ProfileFor> createProfileFor(@RequestBody ProfileFor motherTongue) {
-        ProfileFor saved = profileForRepo.save(motherTongue);
+    public ResponseEntity<ProfileFor> createProfileFor(@RequestBody ProfileFor profileFor) {
+        ProfileFor saved = profileForRepo.save(profileFor);
         return ResponseEntity.ok(saved);
     }
 
