@@ -68,47 +68,54 @@ private  final ProfileForRepository profileForRepository;
 //        otpRepository.deleteByEmail(request.getEmail());
 //        return jwtProvider.generateToken(request.getEmail());
 //    }
+public OtpVerifyResponse verifyOtp(OtpVerifyRequest request) {
 
-    public OtpVerifyResponse verifyOtp(OtpVerifyRequest request) {
-        OtpEntry otpEntry = otpRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("OTP not found"));
+    // 🔹 Step 1: Find OTP entry
+    OtpEntry otpEntry = otpRepository.findByEmail(request.getEmail())
+            .orElseThrow(() -> new RuntimeException("OTP not found"));
 
-        if (otpEntry.isExpired()) {
-            otpRepository.deleteByEmail(request.getEmail());
-            throw new RuntimeException("OTP expired");
-        }
-
-        if (!otpEntry.getOtp().equals(request.getOtp())) {
-            throw new RuntimeException("Invalid OTP");
-        }
-
+    // 🔹 Step 2: Check OTP expiry
+    if (otpEntry.isExpired()) {
         otpRepository.deleteByEmail(request.getEmail());
+        throw new RuntimeException("OTP expired");
+    }
 
-        String token = jwtProvider.generateToken(request.getEmail());
+    // 🔹 Step 3: Validate OTP match
+    if (!otpEntry.getOtp().equals(request.getOtp())) {
+        throw new RuntimeException("Invalid OTP");
+    }
 
+    // ✅ OTP is valid → Delete it after verification
+    otpRepository.deleteByEmail(request.getEmail());
 
-        // Fetch ProfileFor entity
+    // 🔹 Step 4: Generate JWT token
+    String token = jwtProvider.generateToken(request.getEmail());
+
+   Optional <AppUser> existingUser = userRepository.findByEmail(request.getEmail());
+
+    AppUser user;
+
+    if (existingUser.isPresent()) {
+        // 🧠 Existing user → just update token
+         user = existingUser.get();
+    } else {
+        // 🆕 New user → create and save
         ProfileFor profileFor = profileForRepository.findById(request.getProfileForId())
                 .orElseThrow(() -> new RuntimeException("Invalid profileFor ID"));
-
-        AppUser user = new AppUser();
+        user = new AppUser();
         user.setEmail(request.getEmail());
         user.setProfileFor(profileFor);
         user.setLiveWithFamily("1");
 
-        // ✅ Save the user
-        userRepository.save(user);
-
-//        AppUser user = null;
-        Optional<AppUser> userOptional = userRepository.findByEmail(request.getEmail());
-        if (userOptional.isPresent()) {
-            user = userOptional.get();
-            user.setToken(token);
-            userRepository.save(user);
-        }
-
-        return new OtpVerifyResponse(token, user);
     }
+    user.setToken(token);
+    userRepository.save(user);
+
+
+    // ✅ Step 6: Return token + user
+    return new OtpVerifyResponse(token, user);
+}
+
 
 
 
